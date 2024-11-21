@@ -8,27 +8,31 @@ import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.R
 
 class RestaurantCardAdapter(
-    private val cardList: List<RestaurantCardData>,
-    private val onItemClick: (RestaurantCardData) -> Unit
-) : RecyclerView.Adapter<RestaurantCardAdapter.CardViewHolder>() {
+    private var restaurants: List<RestaurantCardData>,
+    private val onClick: (RestaurantCardData) -> Unit
+) : RecyclerView.Adapter<RestaurantCardAdapter.RestaurantViewHolder>() {
 
-    inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
-
-        fun bind(cardData: RestaurantCardData) {
-            titleTextView.text = cardData.title
-            itemView.setOnClickListener { onItemClick(cardData) }
-        }
+    class RestaurantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.restaurant_carditem, parent, false)
-        return CardViewHolder(view)
+        return RestaurantViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.bind(cardList[position])
+    override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
+        val restaurant = restaurants[position]
+        holder.titleTextView.text = restaurant.title
+        holder.itemView.setOnClickListener { onClick(restaurant) }
     }
 
-    override fun getItemCount() = cardList.size
+    override fun getItemCount(): Int {
+        return restaurants.size
+    }
+
+    fun updateRestaurants(newRestaurants: List<RestaurantCardData>) {
+        restaurants = newRestaurants
+        notifyDataSetChanged()
+    }
 }

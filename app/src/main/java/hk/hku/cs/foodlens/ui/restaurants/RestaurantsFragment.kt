@@ -1,12 +1,12 @@
 package hk.hku.cs.foodlens.ui.restaurants
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import hk.hku.cs.foodlens.databinding.FragmentRestaurantsBinding
@@ -15,13 +15,15 @@ class RestaurantsFragment : Fragment() {
 
     private var _binding: FragmentRestaurantsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var restaurantsViewModel: RestaurantsViewModel
+    private lateinit var adapter: RestaurantCardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val restaurantsViewModel =
+        restaurantsViewModel =
             ViewModelProvider(this).get(RestaurantsViewModel::class.java)
 
         _binding = FragmentRestaurantsBinding.inflate(inflater, container, false)
@@ -29,29 +31,19 @@ class RestaurantsFragment : Fragment() {
 
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        val cardList = listOf(
-            RestaurantCardData("Restaurant 1"),
-            RestaurantCardData("Restaurant 2"),
-            RestaurantCardData("Restaurant 3")
-            // Add more RestaurantCardData items here
-        )
-        val adapter = RestaurantCardAdapter(cardList) { cardData ->
+        adapter = RestaurantCardAdapter(emptyList()) { cardData ->
             val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.title)
             findNavController().navigate(action)
         }
         recyclerView.adapter = adapter
 
-        return root
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Handle back button press
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigateUp()
-            }
+        // Observe the restaurants LiveData
+        restaurantsViewModel.restaurants.observe(viewLifecycleOwner, { restaurants ->
+            Log.d("RestaurantsFragment", "Restaurants: $restaurants")
+            adapter.updateRestaurants(restaurants)
         })
+
+        return root
     }
 
     override fun onDestroyView() {
