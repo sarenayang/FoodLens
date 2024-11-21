@@ -19,11 +19,14 @@ class RestaurantCardAdapter(
         val view = LayoutInflater.from(context).inflate(R.layout.restaurant_carditem, parent, false)
         return RestaurantViewHolder(view)
     }
+
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
         val restaurant = restaurants[position]
         holder.bind(restaurant, onItemClick)
     }
+
     override fun getItemCount(): Int = restaurants.size
+
     class RestaurantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.restaurant_name)
         private val cuisineTextView: TextView = itemView.findViewById(R.id.cuisine)

@@ -12,6 +12,7 @@
         android:elevation="5dp"
         app:cardBackgroundColor="#99C33714"
         app:cardCornerRadius="10dp"
+        android:layout_alignParentTop="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout

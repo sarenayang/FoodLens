@@ -30,14 +30,6 @@ class RestaurantsFragment : Fragment() {
         _binding = FragmentRestaurantsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val recyclerView = binding.recyclerView
-////        recyclerView.layoutManager = LinearLayoutManager(context)
-//        adapter = RestaurantCardAdapter(emptyList()) { cardData ->
-//            val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.title)
-//            findNavController().navigate(action)
-//        }
-//        recyclerView.adapter = adapter
-
         return root
     }
 
