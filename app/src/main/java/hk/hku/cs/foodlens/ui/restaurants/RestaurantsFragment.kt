@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.databinding.FragmentRestaurantsBinding
 
 class RestaurantsFragment : Fragment() {
@@ -29,22 +30,33 @@ class RestaurantsFragment : Fragment() {
         _binding = FragmentRestaurantsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = RestaurantCardAdapter(emptyList()) { cardData ->
-            val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.title)
-            findNavController().navigate(action)
-        }
-        recyclerView.adapter = adapter
-
-        // Observe the restaurants LiveData
-        restaurantsViewModel.restaurants.observe(viewLifecycleOwner, { restaurants ->
-            Log.d("RestaurantsFragment", "Restaurants: $restaurants")
-            adapter.updateRestaurants(restaurants)
-        })
+//        val recyclerView = binding.recyclerView
+////        recyclerView.layoutManager = LinearLayoutManager(context)
+//        adapter = RestaurantCardAdapter(emptyList()) { cardData ->
+//            val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.title)
+//            findNavController().navigate(action)
+//        }
+//        recyclerView.adapter = adapter
 
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val recyclerView: RecyclerView = binding.restaurantsListRecyclerview
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val homeViewModel = ViewModelProvider(this).get(RestaurantsViewModel::class.java)
+        homeViewModel.restaurants.observe(viewLifecycleOwner) { restaurants ->
+            recyclerView.adapter = RestaurantCardAdapter(requireContext(), restaurants) { cardData ->
+                val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.name)
+                findNavController().navigate(action)
+            }
+        }
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
