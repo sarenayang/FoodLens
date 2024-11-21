@@ -1,0 +1,78 @@
+Server url routes and methods: 
+
+/accounts
+Displays all accounts in a list 
+
+/accounts/findid/<name>
+returns ID number from a name 
+
+/accounts/create?name=<name>&email=<email>&password=<password>
+create new account, return account ID 
+
+/accounts/<int:Id>
+Returns account corresponding to ID number in the url
+
+/accounts/<int:Id>/name
+Returns the name of the account 
+
+/accounts/<int:Id>/email
+returns the email of the account 
+
+/accounts/<int:Id>/password
+returns the password of the account 
+
+/accounts/<int:Id>/friends/id
+returns the list of the account's friends' IDs 
+
+/accounts/<int:Id>/friends
+returns the list of the account's friends accounts 
+
+/accounts/<account_id>/friends/add?id=<friend's_id>
+Adds a friend to the account friendlist and reciprocately add the account to the friend's friendlist 
+
+ /accounts/<account_id>/reviews
+displays list of account's reviews id
+
+/reviews
+displays all reviews
+
+/reviews/<review_id>/grade
+gets the review's grade
+
+/reviews/<review_id>/restaurant
+gets the review's restaurant 
+
+/reviews/<review_id>/dish
+gets the review's dish
+
+/reviews/<review_id>/account
+gets the review's account
+
+/accounts/<account_id>/reviews/<restaurant>/<dish>/add?grade=<grade>
+adds review of the specified dish in the specified restaurant with the given grade also deletes former reviews for the same dish
+
+/restaurants
+displays the list of restaurants 
+
+/restaurants/findid/<name>
+gets restaurant's id from name 
+
+/restaurants/<rest_id>/dishes
+gets the list of the restaurant's dishes ids
+
+/dishes
+displays the list of all dishes 
+
+/dishes/<Id>
+get the dish corresponding to this Id
+
+
+/dishes/findid/<name>
+find dish id with name 
+
+/dishes/ar/id_search/<Id>
+returns the Ar file for the dish (by ID) 
+
+/dishes/ar/name_search/<name>
+returns the Ar file for the dish (by name) note: the name must be the exact name in the database 
+
