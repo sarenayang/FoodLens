@@ -21,8 +21,8 @@ class RestaurantsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val restaurantsViewModel =
+            ViewModelProvider(this).get(RestaurantsViewModel::class.java)
 
         _binding = FragmentRestaurantsBinding.inflate(inflater, container, false)
         val root: View = binding.root
