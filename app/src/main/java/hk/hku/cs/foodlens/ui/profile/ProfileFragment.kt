@@ -1,4 +1,4 @@
-package hk.hku.cs.foodlens.ui.notifications
+package hk.hku.cs.foodlens.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import hk.hku.cs.foodlens.databinding.FragmentNotificationsBinding
+import hk.hku.cs.foodlens.databinding.FragmentProfileBinding
 import hk.hku.cs.foodlens.ui.Review
 import hk.hku.cs.foodlens.ui.ReviewsAdapter
 
-class NotificationsFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,10 +22,10 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val profileViewModel =
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val userNameTextView = binding.userName
@@ -35,7 +35,7 @@ class NotificationsFragment : Fragment() {
 
         // Set the user's name
         userNameTextView.text = "John Doe" // Replace with actual user name
-        numberOfFriendsTextView.text = "Number of Friends: 5" // Replace with actual number of friends
+        numberOfFriendsTextView.text = "Friends: 5" // Replace with actual number of friends
         // Handle sign out button click
         signOutButton.setOnClickListener {
             // Implement sign out logic here

@@ -14,11 +14,9 @@ class RestaurantCardAdapter(
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
-        private val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
 
         fun bind(cardData: RestaurantCardData) {
             titleTextView.text = cardData.title
-            descriptionTextView.text = cardData.description
             itemView.setOnClickListener { onItemClick(cardData) }
         }
     }

@@ -17,7 +17,7 @@
         android:id="@+id/numberOfFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Number of Friends: 0"
+        android:text="Friends: 0"
         android:textSize="18sp"
         android:layout_marginBottom="16dp"/>
 

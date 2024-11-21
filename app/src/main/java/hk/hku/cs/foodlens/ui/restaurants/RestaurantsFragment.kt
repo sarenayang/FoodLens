@@ -30,13 +30,13 @@ class RestaurantsFragment : Fragment() {
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         val cardList = listOf(
-            RestaurantCardData("Restaurant 1", "Description 1"),
-            RestaurantCardData("Restaurant 2", "Description 2"),
-            RestaurantCardData("Restaurant 3", "Description 3")
+            RestaurantCardData("Restaurant 1"),
+            RestaurantCardData("Restaurant 2"),
+            RestaurantCardData("Restaurant 3")
             // Add more RestaurantCardData items here
         )
         val adapter = RestaurantCardAdapter(cardList) { cardData ->
-            val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.title, cardData.description)
+            val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.title)
             findNavController().navigate(action)
         }
         recyclerView.adapter = adapter

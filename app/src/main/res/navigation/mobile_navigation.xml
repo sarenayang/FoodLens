@@ -23,20 +23,18 @@
         <argument
             android:name="title"
             app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
+
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="hk.hku.cs.foodlens.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_friends"
+        android:name="hk.hku.cs.foodlens.ui.friends.FriendsFragment"
+        android:label="@string/title_friends"
+        tools:layout="@layout/fragment_friends" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="hk.hku.cs.foodlens.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_profile"
+        android:name="hk.hku.cs.foodlens.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

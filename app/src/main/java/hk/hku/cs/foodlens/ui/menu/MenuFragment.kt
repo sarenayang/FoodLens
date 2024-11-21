@@ -24,7 +24,6 @@ class MenuFragment : Fragment() {
         val root: View = binding.root
 
         binding.titleTextView.text = args.title
-        binding.descriptionTextView.text = args.description
 
         return root
     }
