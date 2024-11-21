@@ -3,23 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_restaurants">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="hk.hku.cs.foodlens.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/navigation_restaurants"
+        android:name="hk.hku.cs.foodlens.ui.restaurants.RestaurantsFragment"
+        android:label="Restaurants"
+        tools:layout="@layout/fragment_restaurants">
         <action
-            android:id="@+id/action_homeFragment_to_menuFragment"
-            app:destination="@id/menuFragment" />
+            android:id="@+id/action_restaurantsFragment_to_menuFragment"
+            app:destination="@id/restaurant_menu" />
     </fragment>
 
     <fragment
-        android:id="@+id/menuFragment"
+        android:id="@+id/restaurant_menu"
         android:name="hk.hku.cs.foodlens.ui.menu.MenuFragment"
-        android:label="MenuFragment"
-        tools:layout="@layout/fragment_menu" />
+        android:label="Restaurant Menu"
+        tools:layout="@layout/fragment_menu">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"

@@ -1,4 +1,4 @@
-package hk.hku.cs.foodlens.ui.home
+package hk.hku.cs.foodlens.ui.restaurants
 
 import android.view.LayoutInflater
 import android.view.View

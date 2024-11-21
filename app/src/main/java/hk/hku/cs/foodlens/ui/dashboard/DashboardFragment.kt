@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.databinding.FragmentDashboardBinding
+import hk.hku.cs.foodlens.ui.Review
+import hk.hku.cs.foodlens.ui.ReviewsAdapter
 
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,10 +28,16 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val recyclerView: RecyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val reviews = listOf(
+            Review("User1", "Dish 1", "Restaurant 1", "Great place!", 3),
+            Review("User2", "Dish 2", "Restaurant 2", "Good food.", 2),
+            Review("User3", "Dish 3", "Restaurant 3", "Okay experience.", 1)
+        )
+        recyclerView.adapter = ReviewsAdapter(reviews)
+
         return root
     }
 
