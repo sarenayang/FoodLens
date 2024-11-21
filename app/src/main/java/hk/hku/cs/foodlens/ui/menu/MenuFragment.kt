@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.databinding.FragmentMenuBinding
+import hk.hku.cs.foodlens.ui.ar.ArFragmentArgs
 import hk.hku.cs.foodlens.ui.restaurants.RestaurantCardAdapter
 import hk.hku.cs.foodlens.ui.restaurants.RestaurantsFragmentDirections
 import hk.hku.cs.foodlens.ui.restaurants.RestaurantsViewModel
@@ -21,7 +22,7 @@ class MenuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
     private lateinit var menuViewModel: MenuViewModel
-    private val args: MenuFragmentArgs by navArgs()
+    private val args: ArFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +48,9 @@ class MenuFragment : Fragment() {
 
         val menuViewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
         menuViewModel.menu_items.observe(viewLifecycleOwner) { items ->
-            recyclerView.adapter = MenuItemAdapter(requireContext(), args.title, items) { cardData ->
+            recyclerView.adapter = MenuItemAdapter(requireContext(), args.title, items) { it ->
+                val action = MenuFragmentDirections.actionMenuFragmentToArFragment(it)
+                findNavController().navigate(action)
             }
         }
     }
