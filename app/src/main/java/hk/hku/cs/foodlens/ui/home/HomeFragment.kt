@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import hk.hku.cs.foodlens.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,10 +26,20 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        val cardList = listOf(
+            RestaurantCardData("Restaurant 1", "Description 1"),
+            RestaurantCardData("Restaurant 2", "Description 2"),
+            RestaurantCardData("Restaurant 3", "Description 3")
+            // Add more RestaurantCardData items here
+        )
+        val adapter = RestaurantCardAdapter(cardList) { cardData ->
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(cardData.title, cardData.description)
+            findNavController().navigate(action)
         }
+        recyclerView.adapter = adapter
+
         return root
     }
 

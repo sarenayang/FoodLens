@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "hk.hku.cs.foodlens"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "hk.hku.cs.foodlens"

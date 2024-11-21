@@ -9,7 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="hk.hku.cs.foodlens.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="hk.hku.cs.foodlens.ui.menu.MenuFragment"
+        android:label="MenuFragment"
+        tools:layout="@layout/fragment_menu" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
