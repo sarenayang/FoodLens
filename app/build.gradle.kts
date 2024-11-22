@@ -49,8 +49,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.core)
+    implementation(libs.sceneform.ux)
+    implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.volley)
+    implementation("com.google.ar:core:1.46.0")
+    implementation("io.github.sceneview:arsceneview:0.9.8")
+
 }

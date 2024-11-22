@@ -9,14 +9,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.ar.sceneform.ArSceneView
+import com.google.ar.sceneform.ux.ArFragment
+import hk.hku.cs.foodlens.databinding.FragmentArBinding
 import hk.hku.cs.foodlens.databinding.FragmentMenuBinding
 import hk.hku.cs.foodlens.ui.menu.MenuViewModel
 
 class ArFragment : Fragment() {
 
-    private var _binding: FragmentMenuBinding? = null
+    private var _binding: FragmentArBinding? = null
     private val binding get() = _binding!!
     private lateinit var arViewModel: ArViewModel
+    private lateinit var arSceneView: ArSceneView
     private val args: ArFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -27,7 +31,7 @@ class ArFragment : Fragment() {
         arViewModel =
             ViewModelProvider(this).get(ArViewModel::class.java)
 
-        _binding = FragmentMenuBinding.inflate(inflater, container, false)
+        _binding = FragmentArBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root

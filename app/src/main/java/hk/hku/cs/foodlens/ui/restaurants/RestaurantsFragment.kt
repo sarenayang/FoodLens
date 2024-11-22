@@ -17,7 +17,6 @@ class RestaurantsFragment : Fragment() {
     private var _binding: FragmentRestaurantsBinding? = null
     private val binding get() = _binding!!
     private lateinit var restaurantsViewModel: RestaurantsViewModel
-    private lateinit var adapter: RestaurantCardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
