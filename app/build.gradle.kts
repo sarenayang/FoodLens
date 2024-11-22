@@ -54,6 +54,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.volley)
-    implementation("io.github.sceneview:arsceneview:0.9.8")
+    implementation("io.github.sceneview:arsceneview:0.10.0")
 
 }

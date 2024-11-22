@@ -49,9 +49,7 @@ class MenuFragment : Fragment() {
         menuViewModel.menu_items.observe(viewLifecycleOwner) { items ->
             recyclerView.adapter = MenuItemAdapter(requireContext(), args.title, items) { it ->
                 // Create an Intent to start ARActivity
-                val intent = Intent(requireContext(), ArActivity::class.java).apply {
-                    putExtra("item_id", it) // Pass any necessary data
-                }
+                val intent = Intent(requireContext(), ArActivity::class.java)
                 startActivity(intent)
             }
         }
