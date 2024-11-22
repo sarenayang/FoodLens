@@ -23,20 +23,6 @@
         <argument
             android:name="title"
             app:argType="string" />
-        <action
-            android:id="@+id/action_menuFragment_to_arFragment"
-            app:destination="@id/ar_fragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/ar_fragment"
-        android:name="hk.hku.cs.foodlens.ui.ar.ArFragment"
-        android:label="Ar Item"
-        tools:layout="@layout/fragment_menu">
-        <argument
-            android:name="title"
-            app:argType="string" />
 
     </fragment>
 
