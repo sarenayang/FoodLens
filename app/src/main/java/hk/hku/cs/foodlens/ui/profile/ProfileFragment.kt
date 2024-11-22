@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.databinding.FragmentProfileBinding
-import hk.hku.cs.foodlens.ui.Review
 import hk.hku.cs.foodlens.ui.ReviewsAdapter
+import hk.hku.cs.foodlens.ui.friends.ReviewData
 
 class ProfileFragment : Fragment() {
 
@@ -43,9 +43,9 @@ class ProfileFragment : Fragment() {
 
         // Set up the RecyclerView
         val reviews = listOf(
-            Review("You", "Dish 1", "Restaurant 1", "Great place!", 3),
-            Review("You", "Dish 2", "Restaurant 2", "Good food.", 2),
-            Review("You", "Dish 3", "Restaurant 3", "Okay experience.", 1)
+            ReviewData(1, "1", 1, 1, 3, 1),
+            ReviewData(2, "1", 2, 2, 2, 1),
+            ReviewData(3, "1", 3, 3, 1, 1)
         )
         reviewsRecyclerView.layoutManager = LinearLayoutManager(context)
         reviewsRecyclerView.adapter = ReviewsAdapter(reviews)

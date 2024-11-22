@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.R
+import hk.hku.cs.foodlens.ui.friends.ReviewData
 
 data class Review(val username: String, val dishName: String, val restaurant: String, val reviewText: String, val hearts: Int)
 
-class ReviewsAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder>() {
+class ReviewsAdapter(private var reviews: List<ReviewData>) : RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder>() {
 
     class ReviewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val userHadDishAtRestaurant: TextView = itemView.findViewById(R.id.userHadDishAtRestaurant)
@@ -27,13 +28,17 @@ class ReviewsAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<R
 
     override fun onBindViewHolder(holder: ReviewsViewHolder, position: Int) {
         val review = reviews[position]
-        holder.userHadDishAtRestaurant.text = "${review.username} had ${review.dishName} at ${review.restaurant}"
-        holder.review.text = review.reviewText
+        holder.userHadDishAtRestaurant.text = "${review.friendName} reviewed ${review.dishName} at ${review.restaurantName}"
 
-        // Set hearts visibility based on the number of hearts
-        holder.heart1.visibility = if (review.hearts >= 1) View.VISIBLE else View.INVISIBLE
-        holder.heart2.visibility = if (review.hearts >= 2) View.VISIBLE else View.INVISIBLE
-        holder.heart3.visibility = if (review.hearts >= 3) View.VISIBLE else View.INVISIBLE
+        // Set hearts visibility based on the grade
+        holder.heart1.visibility = if (review.grade >= 1) View.VISIBLE else View.INVISIBLE
+        holder.heart2.visibility = if (review.grade >= 2) View.VISIBLE else View.INVISIBLE
+        holder.heart3.visibility = if (review.grade >= 3) View.VISIBLE else View.INVISIBLE
+    }
+
+    fun updateReviews(newReviews: List<ReviewData>) {
+        reviews = newReviews
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = reviews.size

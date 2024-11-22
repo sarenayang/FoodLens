@@ -16,27 +16,28 @@ class FriendsFragment : Fragment() {
 
     private var _binding: FragmentFriendsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var friendsViewModel: FriendsViewModel
+    private lateinit var adapter: ReviewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val friendsViewModel =
-            ViewModelProvider(this).get(FriendsViewModel::class.java)
+        friendsViewModel = ViewModelProvider(this).get(FriendsViewModel::class.java)
 
         _binding = FragmentFriendsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = ReviewsAdapter(emptyList())
+        recyclerView.adapter = adapter
 
-        val reviews = listOf(
-            Review("User1", "Dish 1", "Restaurant 1", "Great place!", 3),
-            Review("User2", "Dish 2", "Restaurant 2", "Good food.", 2),
-            Review("User3", "Dish 3", "Restaurant 3", "Okay experience.", 1)
-        )
-        recyclerView.adapter = ReviewsAdapter(reviews)
+        // Observe the reviews LiveData
+        friendsViewModel.reviews.observe(viewLifecycleOwner, { reviews ->
+            adapter.updateReviews(reviews)
+        })
 
         return root
     }
