@@ -10,20 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.databinding.FragmentProfileBinding
 import hk.hku.cs.foodlens.ui.ReviewsAdapter
-import hk.hku.cs.foodlens.ui.friends.ReviewData
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var reviewsAdapter: ReviewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -33,22 +33,30 @@ class ProfileFragment : Fragment() {
         val signOutButton = binding.signOutButton
         val reviewsRecyclerView: RecyclerView = binding.reviewsRecyclerView
 
-        // Set the user's name
-        userNameTextView.text = "John Doe" // Replace with actual user name
-        numberOfFriendsTextView.text = "Friends: 5" // Replace with actual number of friends
+        // Observe the user's name
+        profileViewModel.userName.observe(viewLifecycleOwner, { name ->
+            userNameTextView.text = name
+        })
+
+        // Observe the number of friends
+        profileViewModel.numFriends.observe(viewLifecycleOwner, { numFriends ->
+            numberOfFriendsTextView.text = "Friends: $numFriends"
+        })
+
         // Handle sign out button click
         signOutButton.setOnClickListener {
             // Implement sign out logic here
         }
 
         // Set up the RecyclerView
-        val reviews = listOf(
-            ReviewData(1, "1", 1, 1, 3, 1),
-            ReviewData(2, "1", 2, 2, 2, 1),
-            ReviewData(3, "1", 3, 3, 1, 1)
-        )
+        reviewsAdapter = ReviewsAdapter(emptyList())
         reviewsRecyclerView.layoutManager = LinearLayoutManager(context)
-        reviewsRecyclerView.adapter = ReviewsAdapter(reviews)
+        reviewsRecyclerView.adapter = reviewsAdapter
+
+        // Observe the reviews LiveData
+        profileViewModel.reviews.observe(viewLifecycleOwner, { reviews ->
+            reviewsAdapter.updateReviews(reviews)
+        })
 
         return root
     }
