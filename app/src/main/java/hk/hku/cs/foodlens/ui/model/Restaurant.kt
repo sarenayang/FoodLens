@@ -4,5 +4,5 @@ data class Restaurant(
     val name: String,
     val location: String,
     val cuisine: String,
-    val menuItems: List<String> // maybe create MenuItem data class?
+//    val menuItems: List<String> // maybe create MenuItem data class?
 )
