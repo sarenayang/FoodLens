@@ -2,7 +2,6 @@ package hk.hku.cs.foodlens
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.media.MediaPlayer
 import android.net.Uri
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
@@ -13,21 +12,16 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.ar.core.Config
 import io.github.sceneview.ar.ArSceneView
 import io.github.sceneview.ar.node.ArModelNode
-import io.github.sceneview.ar.node.AugmentedImageNode
 import io.github.sceneview.ar.node.PlacementMode
 import io.github.sceneview.material.setExternalTexture
 import io.github.sceneview.math.Position
 import io.github.sceneview.math.Rotation
-import io.github.sceneview.node.VideoNode
 
 class ArActivity : AppCompatActivity() {
 
     private lateinit var sceneView: ArSceneView
     lateinit var placeButton: ExtendedFloatingActionButton
     private lateinit var modelNode: ArModelNode
-    private lateinit var videoNode: VideoNode
-    private lateinit var mediaPlayer:MediaPlayer
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,21 +31,16 @@ class ArActivity : AppCompatActivity() {
             this.lightEstimationMode = Config.LightEstimationMode.DISABLED
         }
 
-        mediaPlayer = MediaPlayer.create(this,R.raw.ad)
-
         placeButton = findViewById(R.id.place)
 
         placeButton.setOnClickListener {
             placeModel()
         }
 
-        videoNode = VideoNode(sceneView.engine, scaleToUnits = 0.7f, centerOrigin = Position(y=-4f), glbFileLocation = "models/plane.glb", player = mediaPlayer, onLoaded = {_,_ ->
-            mediaPlayer.start()
-        })
 
         modelNode = ArModelNode(sceneView.engine,PlacementMode.INSTANT).apply {
             loadModelGlbAsync(
-                glbFileLocation = "models/sofa.glb",
+                glbFileLocation = "models/classic_burger.glb",
                 scaleToUnits = 1f,
                 centerOrigin = Position(-0.5f)
 
@@ -66,8 +55,6 @@ class ArActivity : AppCompatActivity() {
 
         }
         sceneView.addChild(modelNode)
-        modelNode.addChild(videoNode)
-
     }
 
     private fun placeModel(){
@@ -79,11 +66,9 @@ class ArActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        mediaPlayer.stop()
     }
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release()
     }
 
 }
