@@ -1,6 +1,7 @@
 package hk.hku.cs.foodlens
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.opengl.Visibility
@@ -25,6 +26,10 @@ class ArActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val intent: Intent = getIntent()
+        val filename = intent.getStringExtra("Filename");
+
         setContentView(R.layout.activity_ar)
 
         sceneView = findViewById<ArSceneView?>(R.id.sceneView).apply {
@@ -37,10 +42,11 @@ class ArActivity : AppCompatActivity() {
             placeModel()
         }
 
-
+        // create model node
         modelNode = ArModelNode(sceneView.engine,PlacementMode.INSTANT).apply {
             loadModelGlbAsync(
-                glbFileLocation = "models/classic_burger.glb",
+//                glbFileLocation = "models/classic_burger.glb",
+                glbFileLocation = "models/$filename",
                 scaleToUnits = 1f,
                 centerOrigin = Position(-0.5f)
 

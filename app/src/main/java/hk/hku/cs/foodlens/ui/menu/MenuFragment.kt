@@ -38,6 +38,12 @@ class MenuFragment : Fragment() {
 
         binding.titleTextView.text = args.restaurantName
 
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val recyclerView: RecyclerView = binding.menuListRecyclerview
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -46,16 +52,11 @@ class MenuFragment : Fragment() {
             recyclerView.adapter = MenuItemAdapter(requireContext(), args.restaurantName, items) { it ->
                 // Create an Intent to start ARActivity
                 val intent = Intent(requireContext(), ArActivity::class.java)
+                val filename = it.dishFileName
+                intent.putExtra("Filename", filename)
                 startActivity(intent)
             }
         }
-
-        return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
 
     }
 

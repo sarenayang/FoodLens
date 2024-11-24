@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.navArgs
 import com.android.volley.Request
+import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
@@ -25,13 +26,21 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
     var _restaurantId: String = restaurant_id
     val localIp = "http://10.71.10.68:5000" // REPLACE WITH LOCAL SERVER IP
 
+    val requestQueue: RequestQueue = Volley.newRequestQueue(getApplication())
+
 
     init {
 //        fetchMenuItemsFromDatabase()
 
         // for testing
-        val item1: MenuItem = MenuItem("Item 1", "sushi.glb")
-        _menuItems.value = listOf(item1)
+        val item1: MenuItem = MenuItem("Sushi Platter", "sushi.glb")
+        val item2: MenuItem = MenuItem("Beef Burger", "classic_burger.glb")
+        val item3: MenuItem = MenuItem("Cold Sesame Noodles", "cold_noodles.glb")
+        val item4: MenuItem = MenuItem("Beef Rice Bowl", "beef_rice_bowl.glb")
+
+
+
+        _menuItems.value = listOf(item1, item2, item3, item4)
     }
 
 //    fun setRestaurantId(id: String) {
@@ -53,7 +62,7 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
             { error ->
                 Log.e("MenuViewModel", "Error fetching menu", error)
             })
-        Volley.newRequestQueue(getApplication()).add(jsonArrayRequest)
+        requestQueue.add(jsonArrayRequest)
     }
 
     private fun parseMenu(response: JSONArray) {
@@ -61,7 +70,7 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
         for (i in 0 until response.length()) {
             val dishId = response.getString(i)
 
-            val url = "$localIp/dishes/$dishId" // gets the dish info from dish id
+            val url = "$localIp/dishes/${dishId}" // gets the dish info from dish id
             val jsonArrayRequest = JsonArrayRequest(
                 Request.Method.GET, url, null,
                 { response ->
@@ -72,7 +81,7 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
                 { error ->
                     Log.e("MenuViewModel", "Error fetching dish info", error)
                 })
-            Volley.newRequestQueue(getApplication()).add(jsonArrayRequest)
+            requestQueue.add(jsonArrayRequest)
 
         }
 

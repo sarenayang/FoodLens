@@ -16,16 +16,17 @@ class RestaurantsViewModel(application: Application) : AndroidViewModel(applicat
     val restaurants: LiveData<List<Restaurant>> = _restaurants
 
     init {
-        fetchRestaurantsFromDatabase()
-//        _restaurants.value = listOf(
-//            Restaurant("Chickin Nuggies Restaurante", "ur mom's house", "freezer food"),
-//            Restaurant("Borger Guys", "ur mom's house", "fast food"),
-//            Restaurant("Mickey D's", "ur mom's house", "fast food")
-//        )
+//        fetchRestaurantsFromDatabase()
+        _restaurants.value = listOf(
+            Restaurant("1,","Chickin Nuggies Restaurante", "ur mom's house", "freezer food"),
+            Restaurant("2","Borger Guys", "ur mom's house", "fast food"),
+            Restaurant("3","Mickey D's", "ur mom's house", "fast food")
+        )
     }
 
     private fun fetchRestaurantsFromDatabase() {
-        val localIp = "http://10.71.10.68:5000" // REPLACE WITH LOCAL SERVER IP
+//        val localIp = "http://10.71.10.68:5000" // REPLACE WITH LOCAL SERVER IP
+        val localIp = "http://172.30.64.180:5000"
         val url = "$localIp/restaurants"
         val jsonArrayRequest = JsonArrayRequest(
             Request.Method.GET, url, null,
