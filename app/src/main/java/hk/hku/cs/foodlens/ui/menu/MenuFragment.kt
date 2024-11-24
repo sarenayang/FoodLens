@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.ArActivity
 import hk.hku.cs.foodlens.R
 import hk.hku.cs.foodlens.databinding.FragmentMenuBinding
+import io.github.sceneview.utils.colorOf
 
 
 class MenuFragment : Fragment() {
@@ -78,7 +80,20 @@ class MenuFragment : Fragment() {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.fragment_rating)
 
+        val star1: ImageView = dialog.findViewById(R.id.star1)
+        star1.setOnClickListener { star1.setImageResource(R.drawable.star_filled_rating) }// Change to selected star image
+        val star2: ImageView = dialog.findViewById(R.id.star2)
+        star2.setOnClickListener {
+            star1.setImageResource(R.drawable.star_filled_rating)
+            star2.setImageResource(R.drawable.star_filled_rating)
+        }
+        val star3: ImageView = dialog.findViewById(R.id.star3)
+        star3.setOnClickListener {
+            star1.setImageResource(R.drawable.star_filled_rating)
+            star2.setImageResource(R.drawable.star_filled_rating)
+            star3.setImageResource(R.drawable.star_filled_rating)
 
+        }
 
         val doneBtn = dialog.findViewById(R.id.doneButton) as Button
         doneBtn.setOnClickListener {
