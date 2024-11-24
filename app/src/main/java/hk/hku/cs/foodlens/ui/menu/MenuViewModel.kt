@@ -27,8 +27,11 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
 
 
     init {
-        fetchMenuItemsFromDatabase()
-//        _menuItems.value = listOf("item1", "item2", "item3")
+//        fetchMenuItemsFromDatabase()
+
+        // for testing
+        val item1: MenuItem = MenuItem("Item 1", "sushi.glb")
+        _menuItems.value = listOf(item1)
     }
 
 //    fun setRestaurantId(id: String) {
