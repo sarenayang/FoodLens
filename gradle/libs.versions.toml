@@ -13,6 +13,9 @@ lifecycleViewmodelKtx = "2.8.7"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
 volley = "1.2.1"
+core = "1.17.1"
+sceneformUx = "1.17.1"
+activity = "1.9.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,6 +30,9 @@ androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifec
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
+core = { group = "com.google.ar.sceneform", name = "core", version.ref = "core" }
+sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", version.ref = "sceneformUx" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
