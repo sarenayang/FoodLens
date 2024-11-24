@@ -58,7 +58,7 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
         for (i in 0 until response.length()) {
             val dishId = response.getString(i)
 
-            val url = "$localIp/restaurants/dishes/$dishId" // gets the dish info from dish id
+            val url = "$localIp/restaurants/$dishId/dishes" // gets the dish info from dish id
             val jsonArrayRequest = JsonArrayRequest(
                 Request.Method.GET, url, null,
                 { response ->
