@@ -44,8 +44,9 @@ class RestaurantsViewModel(application: Application) : AndroidViewModel(applicat
         val restaurantList = mutableListOf<Restaurant>()
         for (i in 0 until response.length()) {
             val restaurantArray = response.getJSONArray(i)
+            val restaurantId = restaurantArray.getString(0)
             val restaurantName = restaurantArray.getString(1) // Assuming the title is the second element
-            restaurantList.add(Restaurant(restaurantName, "location","cuisine"))
+            restaurantList.add(Restaurant(restaurantId, restaurantName, "location","cuisine"))
         }
         return restaurantList
     }

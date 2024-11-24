@@ -21,7 +21,10 @@
         android:label="Restaurant Menu"
         tools:layout="@layout/fragment_menu">
         <argument
-            android:name="title"
+            android:name="restaurantId"
+            app:argType="string" />
+        <argument
+            android:name="restaurantName"
             app:argType="string" />
 
     </fragment>

@@ -20,7 +20,9 @@ class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
+//    private lateinit var menuViewModel: MenuViewModel
     private lateinit var menuViewModel: MenuViewModel
+
     private val args: MenuFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -28,13 +30,18 @@ class MenuFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        menuViewModel =
-            ViewModelProvider(this).get(MenuViewModel::class.java)
+
+        menuViewModel = ViewModelProvider(this, MenuViewModelFactory(args.restaurantId, requireActivity().application)).get(MenuViewModel::class.java)
+
+//        menuViewModel =
+//            ViewModelProvider(this).get(MenuViewModel::class.java)
+//
+//        menuViewModel.setRestaurantId(args.restaurantId)
 
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.titleTextView.text = args.title
+        binding.titleTextView.text = args.restaurantName
 
         return root
     }
@@ -47,7 +54,7 @@ class MenuFragment : Fragment() {
 
         val menuViewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
         menuViewModel.menu_items.observe(viewLifecycleOwner) { items ->
-            recyclerView.adapter = MenuItemAdapter(requireContext(), args.title, items) { it ->
+            recyclerView.adapter = MenuItemAdapter(requireContext(), args.restaurantName, items) { it ->
                 // Create an Intent to start ARActivity
                 val intent = Intent(requireContext(), ArActivity::class.java)
                 startActivity(intent)

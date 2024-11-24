@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.R
+import hk.hku.cs.foodlens.ui.model.MenuItem
 
 
 class MenuItemAdapter(
     private val context: Context,
     private val restaurantName: String,
-    private val menuItems: List<String>,
-    private val onItemClick: (String) -> Unit
+    private val menuItems: List<MenuItem>,
+    private val onItemClick: (MenuItem) -> Unit
 ) : RecyclerView.Adapter<MenuItemAdapter.MenuViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
@@ -25,6 +26,7 @@ class MenuItemAdapter(
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         val item = menuItems[position]
         holder.bind(item, onItemClick)
+
     }
 
     override fun getItemCount(): Int = menuItems.size
@@ -32,9 +34,9 @@ class MenuItemAdapter(
     class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val itemNameTextView: TextView = itemView.findViewById(R.id.item_name)
 
-        fun bind(itemName: String, onItemClick: (String) -> Unit) {
-            itemNameTextView.text = itemName
-            itemView.setOnClickListener { onItemClick(itemName) }
+        fun bind(menuItem: MenuItem, onItemClick: (MenuItem) -> Unit) {
+            itemNameTextView.text = menuItem.dishName
+            itemView.setOnClickListener { onItemClick(menuItem) }
         }
     }
 }

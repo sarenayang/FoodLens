@@ -41,7 +41,7 @@ class RestaurantsFragment : Fragment() {
         val homeViewModel = ViewModelProvider(this).get(RestaurantsViewModel::class.java)
         homeViewModel.restaurants.observe(viewLifecycleOwner) { restaurants ->
             recyclerView.adapter = RestaurantCardAdapter(requireContext(), restaurants) { cardData ->
-                val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.name)
+                val action = RestaurantsFragmentDirections.actionRestaurantsFragmentToMenuFragment(cardData.id, cardData.name)
                 findNavController().navigate(action)
             }
         }
