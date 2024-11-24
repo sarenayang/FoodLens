@@ -30,9 +30,11 @@ class RestaurantCardAdapter(
     class RestaurantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.restaurant_name)
         private val cuisineTextView: TextView = itemView.findViewById(R.id.cuisine)
+        private val locationTextView: TextView = itemView.findViewById(R.id.location)
         fun bind(restaurant: Restaurant, onItemClick: (Restaurant) -> Unit) {
             nameTextView.text = restaurant.name
             cuisineTextView.text = restaurant.cuisine
+            locationTextView.text = restaurant.location
             itemView.setOnClickListener { onItemClick(restaurant) }
         }
     }

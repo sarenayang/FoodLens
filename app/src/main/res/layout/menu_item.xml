@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#cf5764"
+        android:background="#e89ba3"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp">
         <TextView
