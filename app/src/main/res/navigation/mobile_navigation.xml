@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_restaurants">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/navigation_restaurants"
@@ -15,6 +15,11 @@
             app:destination="@id/restaurant_menu" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_restaurants2"
+        android:name="hk.hku.cs.foodlens.ui.restaurants.RestaurantsFragment"
+        android:label="Restaurants"
+        tools:layout="@layout/fragment_restaurants"/>
     <fragment
         android:id="@+id/restaurant_menu"
         android:name="hk.hku.cs.foodlens.ui.menu.MenuFragment"
@@ -30,14 +35,40 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_friends"
-        android:name="hk.hku.cs.foodlens.ui.friends.FriendsFragment"
-        android:label="@string/title_friends"
-        tools:layout="@layout/fragment_friends" />
-
-    <fragment
         android:id="@+id/navigation_profile"
         android:name="hk.hku.cs.foodlens.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="hk.hku.cs.foodlens.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+
+        <!-- Action to Signup Fragment -->
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+
+        <!-- Action to Restaurants Fragment -->
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_restaurants"
+            app:destination="@id/navigation_restaurants" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="hk.hku.cs.foodlens.ui.signup.SignupFragment"
+        android:label="Signup"
+        tools:layout="@layout/fragment_signup">
+
+    <!-- Action to Login Fragment (if necessary for flow) -->
+    <action
+        android:id="@+id/action_signupFragment_to_loginFragment"
+        app:destination="@id/loginFragment" />
+    </fragment>
+
+
+
 </navigation>
