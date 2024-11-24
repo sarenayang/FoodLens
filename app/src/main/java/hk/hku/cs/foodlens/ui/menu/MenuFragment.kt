@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hk.hku.cs.foodlens.ArActivity
+import hk.hku.cs.foodlens.R
 import hk.hku.cs.foodlens.databinding.FragmentMenuBinding
 
 
@@ -20,7 +21,6 @@ class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
-//    private lateinit var menuViewModel: MenuViewModel
     private lateinit var menuViewModel: MenuViewModel
 
     private val args: MenuFragmentArgs by navArgs()
@@ -33,21 +33,10 @@ class MenuFragment : Fragment() {
 
         menuViewModel = ViewModelProvider(this, MenuViewModelFactory(args.restaurantId, requireActivity().application)).get(MenuViewModel::class.java)
 
-//        menuViewModel =
-//            ViewModelProvider(this).get(MenuViewModel::class.java)
-//
-//        menuViewModel.setRestaurantId(args.restaurantId)
-
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         binding.titleTextView.text = args.restaurantName
-
-        return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = binding.menuListRecyclerview
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -60,6 +49,14 @@ class MenuFragment : Fragment() {
                 startActivity(intent)
             }
         }
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
     }
 
 

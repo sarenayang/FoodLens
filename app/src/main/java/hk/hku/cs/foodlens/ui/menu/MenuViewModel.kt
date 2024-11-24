@@ -31,11 +31,11 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
 //        _menuItems.value = listOf("item1", "item2", "item3")
     }
 
-    fun setRestaurantId(id: String) {
-        _restaurantId = id
-        Log.v("BRUH", _restaurantId)
-
-    }
+//    fun setRestaurantId(id: String) {
+//        _restaurantId = id
+//        Log.v("BRUH", _restaurantId)
+//
+//    }
 
     private fun fetchMenuItemsFromDatabase() {
         val url = "$localIp/restaurants/${_restaurantId}/dishes" // gets the menu of dish ids
@@ -44,7 +44,7 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
         val jsonArrayRequest = JsonArrayRequest(
             Request.Method.GET, url, null,
             { response ->
-                Log.d("MenuViewModel", "Response: $response")
+                Log.d("MenuViewModel", "Fetch menu from database Response: $response")
                 parseMenu(response)
             },
             { error ->
@@ -58,11 +58,11 @@ class MenuViewModel(restaurant_id: String, application: Application) : AndroidVi
         for (i in 0 until response.length()) {
             val dishId = response.getString(i)
 
-            val url = "$localIp/restaurants/$dishId/dishes" // gets the dish info from dish id
+            val url = "$localIp/dishes/$dishId" // gets the dish info from dish id
             val jsonArrayRequest = JsonArrayRequest(
                 Request.Method.GET, url, null,
                 { response ->
-                    Log.d("MenuViewModel", "Response: $response")
+                    Log.d("MenuViewModel", "parse menu Response: $response")
                     val menuItem = parseMenuItem(response)
                     menu.add(menuItem)
                 },

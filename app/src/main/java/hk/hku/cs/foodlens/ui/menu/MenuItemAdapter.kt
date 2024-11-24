@@ -1,6 +1,7 @@
 package hk.hku.cs.foodlens.ui.menu
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -36,6 +37,7 @@ class MenuItemAdapter(
 
         fun bind(menuItem: MenuItem, onItemClick: (MenuItem) -> Unit) {
             itemNameTextView.text = menuItem.dishName
+            Log.v("BRUH", menuItem.dishName)
             itemView.setOnClickListener { onItemClick(menuItem) }
         }
     }
