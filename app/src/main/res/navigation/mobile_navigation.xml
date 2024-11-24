@@ -35,6 +35,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_friends"
+        android:name="hk.hku.cs.foodlens.ui.friends.FriendsFragment"
+        android:label="Friends"
+        tools:layout="@layout/fragment_friends" />
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="hk.hku.cs.foodlens.ui.profile.ProfileFragment"
         android:label="@string/title_profile"

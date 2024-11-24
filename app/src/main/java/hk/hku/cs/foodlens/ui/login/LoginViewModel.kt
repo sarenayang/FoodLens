@@ -17,7 +17,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val errorMessage = MutableLiveData<String>()
 
     fun login(username: String, password: String) {
-        val url = "http://10.71.1.1:5000/accounts/findid/$username" // CHANGE THIS TO YOUR LOCAL SERVER
+        val url = "http://172.30.64.180:5000/accounts/findid/$username" // CHANGE THIS TO YOUR LOCAL SERVER
 
         val stringRequest = StringRequest(
             Request.Method.GET,
