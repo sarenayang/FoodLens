@@ -18,10 +18,17 @@ class RestaurantsViewModel(application: Application) : AndroidViewModel(applicat
     init {
 //        fetchRestaurantsFromDatabase()
         _restaurants.value = listOf(
-            Restaurant("1,","Chickin Nuggies Restaurante", "ur mom's house", "freezer food"),
-            Restaurant("2","Borger Guys", "ur mom's house", "fast food"),
-            Restaurant("3","Mickey D's", "ur mom's house", "fast food")
-        )
+            Restaurant("1,","Chickin Nuggies Restaurante", "Central, Hong Kong", "freezer food"),
+            Restaurant("2","Borger Guys", "Sai Ying Pun, Hong Kong", "fast food"),
+            Restaurant("3","Mickey D's", "New York, United States", "fast food"),
+            Restaurant("4","Din Tai Fung", "Taipei, Taiwan", "Taiwanese"),
+            Restaurant("5","Ichiran", "Shibuya, Japan", "Japanese"),
+            Restaurant("6","Bonchon Chicken", "Korea", "Korean"),
+            Restaurant("7","Chipotle", "United States", "Mexican"),
+            Restaurant("8","Chipotle", "United States", "Mexican"),
+            Restaurant("9","Nando's", "United Kingdom", "South African"),
+
+            )
     }
 
     private fun fetchRestaurantsFromDatabase() {
